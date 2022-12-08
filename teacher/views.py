@@ -69,7 +69,7 @@ def teacher_add_exam_view(request):
         else:
             print("form is invalid")
         return HttpResponseRedirect('/teacher/teacher-view-exam')
-    return render(request,'teacher/teacher_add_exam.html',{'courseForm':courseForm})
+    return render(request,'teacher/teacher_add_test.html',{'courseForm':courseForm})
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)

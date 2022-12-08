@@ -1,4 +1,6 @@
 from django.shortcuts import render,redirect,reverse
+import random
+import numpy as np
 from . import forms,models
 from django.db.models import Sum
 from django.contrib.auth.models import Group
@@ -70,7 +72,8 @@ def take_exam_view(request,pk):
 @user_passes_test(is_student)
 def start_exam_view(request,pk):
     course=QMODEL.Course.objects.get(id=pk)
-    questions=QMODEL.Question.objects.all().filter(course=course)
+    questions=list(QMODEL.Question.objects.all().filter(course=course))
+    random.shuffle(questions)
     if request.method=='POST':
         pass
     response= render(request,'student/start_exam.html',{'course':course,'questions':questions})
